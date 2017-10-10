@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Welcome to this page</title>
+	<link rel="icon" href="image/icon.jpg" type="image/x-icon"/>
+	<script type="text/javascript" src="js/common/common.js"></script>
+	<script type="text/javascript" src="js/common/jquery.js"></script>
+	<script type="text/javascript" src="js/login.js"></script>
+</head>
+<body>
+	<div id ="loginForm" style="text-align: center">
+		<h2>用户登录</h2>
+		<br>
+		<form action= "login" method="post" onsubmit="return confirm()" >
+			<p> 管理员 : <input type="text"  id="username" name="username" />
+			<p> 密&nbsp;&nbsp;码 &nbsp;: <input type="password" id="password" name="password" />
+			<p> <input type="submit" id="login" value="LOGIN" />
+			<p><a href= "views/input">请点击这里添加用户信息</a>
+		</form>
+	</div>
+</body>
+</html>

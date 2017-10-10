@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>数据运维系统</title>
+</head>
+<script type="text/javascript" src="../js/common/common.js"></script>
+<body>
+	<div id ="loginForm" style="text-align: center">
+		<h2>信息查询</h2>
+		<br>
+		<form action= "/springboot/input" method="post"  >
+			<p> 姓名 : <input type="text"  id="name" name="name" />
+			<p> 年龄 : <input type="text" id="age" name="age" />
+			<p> 性别 : <input type="radio" id="type1" name="type" checked="checked" value="男" />男
+					&emsp;&emsp;&emsp; <input type="radio" id="type2" name="type" value="女"/>女 &emsp;&emsp;
+			<p> 身份证号 : <input type="text"  id="idNumber" name="idNumber" />&emsp;&emsp;
+			<p> <input type="submit" id="add" value="添加用户" />
+				&emsp;&emsp;&emsp;&emsp;<input type="button" id="return" value="返回上级" onclick= "back()" />
+		</form>
+	</div>
+
+</body>
+</html>

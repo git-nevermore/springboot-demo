@@ -1,0 +1,21 @@
+#! 开发环境配置文件
+server:
+  port: 90
+  contextPath: /springboot
+  
+# 配置日志信息
+logging:
+  file: D:\Project\springboot\logs\springboot.log
+  
+  level: 
+    org: 
+      springframework: 
+        web: INFO
+
+# 配置Spring 转发器
+spring: 
+  mvc: 
+    view: 
+      prefix: /views/
+      suffix: .html
+    

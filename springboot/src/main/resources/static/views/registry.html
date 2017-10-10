@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script type="text/javascript" src="../js/common/common.js"></script>
+<body>
+	<div id ="loginForm" style="text-align: center">
+		<h2>User Registry</h2>
+		<br>
+		<form action= "/springboot/registry" method="post"  >
+			<p> Username : <input type="text"  id="username" name="username" />
+			<p> Password &nbsp;: <input type="password" id="password" name="password" />
+			<p> Nickname : <input type="text"  id="nickname" name="nickname" />
+			<p> Type:&emsp;&emsp; <input type="radio" id="type1" name="type" checked="checked" value="普通用户" />普通用户
+					   <input type="radio" id="type2" name="type" value="管理员" disabled="disabled"/>管理员
+			<p> <input type="submit" id="registry" value="REGISTRY" />
+				&emsp;&emsp;&emsp;&emsp;&emsp;<input type="button" id="return" value="RETURN" onclick= "back()" />
+		</form>
+	</div>
+
+</body>
+</html>
