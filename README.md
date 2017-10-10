@@ -1,2 +1,2 @@
 # springboot-demo
-SpringBoot 项目Demo 及应用测试
+SpringBoot 项目应用Demo
