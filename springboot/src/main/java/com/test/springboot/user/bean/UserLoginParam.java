@@ -1,5 +1,7 @@
 package com.test.springboot.user.bean;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 /**
  * 用户登录参数
  * @author chenwenjie
@@ -20,6 +22,7 @@ public class UserLoginParam {
 		this.password = password;
 	}
 
+	@NotEmpty
 	public String getUsername() {
 		return username;
 	}
@@ -28,6 +31,7 @@ public class UserLoginParam {
 		this.username = username;
 	}
 
+	@NotEmpty
 	public String getPassword() {
 		return password;
 	}
