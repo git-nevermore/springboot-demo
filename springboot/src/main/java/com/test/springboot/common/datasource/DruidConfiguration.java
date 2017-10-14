@@ -26,8 +26,7 @@ import com.alibaba.druid.support.http.WebStatFilter;
  * @since 2017-10-09
  */
 @Configuration
-@EnableJpaRepositories(basePackages = DruidConfiguration.BASE_PACKAGE, 
-	transactionManagerRef = "transactionManager", entityManagerFactoryRef = "entityManagerFactory")
+@EnableJpaRepositories(basePackages = DruidConfiguration.BASE_PACKAGE, transactionManagerRef = "transactionManager", entityManagerFactoryRef = "entityManagerFactory")
 @EnableTransactionManagement(proxyTargetClass = true)
 public class DruidConfiguration {
 
@@ -35,49 +34,51 @@ public class DruidConfiguration {
 	 * 数据源管理路径扫描范围
 	 */
 	protected static final String BASE_PACKAGE = "com.test.springboot";
-	
+
 	/**
 	 * 数据库方言(暂时写死为 MySQL)
 	 */
 	protected static final String DATABASE_DIALOG = "org.hibernate.dialect.MySQLDialect";
-	
+
 	/**
 	 * 数据源的配置
-	 * <p>暂时写死为MySQL 的简单配置
-	 * <p>#TODO 后续将加强优化配置存储 和多数据库支持
+	 * <p>
+	 * 暂时写死为MySQL 的简单配置
+	 * <p>
+	 * #TODO 后续将加强优化配置存储 和多数据库支持
 	 * 
 	 * @return
 	 * @throws SQLException
 	 */
-    @Bean(name = "dataSource",initMethod = "init" ,destroyMethod = "close")
-    public DruidDataSource druidDataSource() throws SQLException {
-        DruidDataSource dataSource = new DruidDataSource();
-        dataSource.setUsername("root");
-        dataSource.setPassword("root");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/test?characterEncoding=utf8&useSSL=true");
-        dataSource.setMaxActive(100);
-        dataSource.setFilters("stat,wall");
-        dataSource.setInitialSize(10);
-        return dataSource;
-    }
-    
-    @Bean
-    public ServletRegistrationBean druidServlet() {
-        ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean();
-        servletRegistrationBean.setServlet(new StatViewServlet());
-        servletRegistrationBean.addUrlMappings("/druid/*");
-        return servletRegistrationBean;
-    }
+	@Bean(name = "dataSource", initMethod = "init", destroyMethod = "close")
+	public DruidDataSource druidDataSource() throws SQLException {
+		DruidDataSource dataSource = new DruidDataSource();
+		dataSource.setUsername("root");
+		dataSource.setPassword("root");
+		dataSource.setUrl("jdbc:mysql://localhost:3306/test?characterEncoding=utf8&useSSL=true");
+		dataSource.setMaxActive(100);
+		dataSource.setFilters("stat,wall");
+		dataSource.setInitialSize(10);
+		return dataSource;
+	}
 
-   @Bean
-    public FilterRegistrationBean filterRegistrationBean() {
-        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
-        filterRegistrationBean.setFilter(new WebStatFilter());
-        filterRegistrationBean.addUrlPatterns("/*");
-        filterRegistrationBean.addInitParameter("exclusions", "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*");
-        return filterRegistrationBean;
-    }
- 
+	@Bean
+	public ServletRegistrationBean druidServlet() {
+		ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean();
+		servletRegistrationBean.setServlet(new StatViewServlet());
+		servletRegistrationBean.addUrlMappings("/druid/*");
+		return servletRegistrationBean;
+	}
+
+	@Bean
+	public FilterRegistrationBean filterRegistrationBean() {
+		FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
+		filterRegistrationBean.setFilter(new WebStatFilter());
+		filterRegistrationBean.addUrlPatterns("/*");
+		filterRegistrationBean.addInitParameter("exclusions", "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*");
+		return filterRegistrationBean;
+	}
+
 	@Bean(name = "entityManagerFactory")
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws Exception {
 		LocalContainerEntityManagerFactoryBean lcemfb = new LocalContainerEntityManagerFactoryBean();
@@ -94,14 +95,14 @@ public class DruidConfiguration {
 
 		return lcemfb;
 	}
-	
-   @Bean(name = "hibernateJpaVendorAdapter")
+
+	@Bean(name = "hibernateJpaVendorAdapter")
 	public HibernateJpaVendorAdapter hibernateJpaVendorAdapter() {
 		HibernateJpaVendorAdapter hjva = new HibernateJpaVendorAdapter();
 		hjva.setDatabasePlatform(DATABASE_DIALOG);
 		return hjva;
 	}
-	
+
 	@Bean(name = "transactionManager")
 	public PlatformTransactionManager transactionManager() throws Exception {
 		JpaTransactionManager jtm = new JpaTransactionManager();
