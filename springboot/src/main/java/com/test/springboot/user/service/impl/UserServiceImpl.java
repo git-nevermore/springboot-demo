@@ -5,9 +5,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import com.test.springboot.common.exception.BaseException;
 import com.test.springboot.user.bean.UserCreateParam;
+import com.test.springboot.user.bean.UserLoginParam;
 import com.test.springboot.user.bean.UserQueryParam;
 import com.test.springboot.user.bean.UserUpdateParam;
 import com.test.springboot.user.dao.UserDao;
@@ -21,26 +23,27 @@ public class UserServiceImpl implements UserService{
 	private UserDao userDao;
 	
 	@Override
-	public User getUser(Integer id) {
-		return userDao.findOne(id);
+	public User getByName(String username) {
+		Assert.notNull(username,"用户名不能为空");
+		return userDao.findByUsername(username);
 	}
 	
 	@Override
-	public List<User> getAll() {
+	public List<User> listAll() {
 		return userDao.findAll();
 	}
 
 	@Override
-	public List<User> getUsers(UserQueryParam userQueryParam) {
+	public List<User> listUsers(UserQueryParam userQueryParam) {
 		return userDao.queryUsers(userQueryParam);
 	}
 
 	@Override
 	public User createUser(UserCreateParam userCreateParam) {
 		User user = new User();
-	/*	if(this.getUser(userCreateParam.getUsername()) != null ){
+		if(this.getByName(userCreateParam.getUsername()) != null ){
 			throw new BaseException("用户名称已存在！");
-		}*/
+		}
 		user.setNickname(userCreateParam.getNickname());
 		user.setUsername(userCreateParam.getUsername());
 		user.setPassword(userCreateParam.getPassword());
@@ -63,6 +66,16 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public void deleteUser(Integer id) {
 		userDao.delete(id);
+	}
+
+	@Override
+	public User checkLogin(UserLoginParam userLoginParam) {
+		String username = userLoginParam.getUsername();
+		String password = userLoginParam.getPassword();
+		if (username == null || password == null) {
+			throw new BaseException("输入参数有误,账户名或密码不能为空");
+		}
+		return userDao.findByUsernameAndPassword(username, password);
 	}
 
 }

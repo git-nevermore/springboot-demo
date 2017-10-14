@@ -3,6 +3,7 @@ package com.test.springboot.user.service;
 import java.util.List;
 
 import com.test.springboot.user.bean.UserCreateParam;
+import com.test.springboot.user.bean.UserLoginParam;
 import com.test.springboot.user.bean.UserQueryParam;
 import com.test.springboot.user.bean.UserUpdateParam;
 import com.test.springboot.user.entity.User;
@@ -20,13 +21,15 @@ public interface UserService {
 	 * @param username
 	 * @return
 	 */
-	User getByName(String name);
+
+	User getByName(String username);
 	
 	/**
 	 * 获取全部用户信息
 	 * @return
 	 */
-	List<User> getAll();
+
+	List<User> listAll();
 
 	/**
 	 * 根据查询条件获取指定用户
@@ -47,7 +50,8 @@ public interface UserService {
 	 * @param user
 	 * @return
 	 */
-	User updateUser(UserUpdateParam userUpdateParam);
+
+	User modifyUser(UserUpdateParam userUpdateParam);
 
 	/**
 	 * 删除用户
@@ -55,5 +59,12 @@ public interface UserService {
 	 * @return
 	 */
 	void deleteUser(Integer id);
+
+	/**
+	 * 用户登录检测
+	 * @param id
+	 * @return
+	 */
+	User checkLogin(UserLoginParam userLoginParam);
 
 }
